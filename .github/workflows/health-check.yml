@@ -1,0 +1,61 @@
+name: Scheduled Health Check
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+jobs:
+  check:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    name: Check all sites
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run healthchecks
+        env:
+          SIMSIM: ${{ secrets.SIMSIM }}
+        run: >
+          curl --variable date="$(date '+%Y-%m-%d %H:%M')" --variable simsim="$SIMSIM"
+          -K curl-config
+          https://raw.githack.com/#website
+          --next -K curl-config
+          https://raw.githack.com/purge#purge --expand-data '{"patron": "{{simsim}}", "files": [
+          "https://raw.githack.com/neoascetic/rawgithack/b6d3163820c248da0144168cd6f0304db9fc6b73/web/index.html",
+          "https://rawcdn.githack.com/neoascetic/rawgithack/b6d3163820c248da0144168cd6f0304db9fc6b73/web/index.html",
+          "https://gist.githack.com/neoascetic/7716ac3cb04751d428063e9067763403/raw/e1e387baea2f73175f16f8460ff1f528910bfe16/test.html",
+          "https://gistcdn.githack.com/neoascetic/7716ac3cb04751d428063e9067763403/raw/e1e387baea2f73175f16f8460ff1f528910bfe16/test.html",
+          "https://gl.githack.com/neoascetic/test.html/-/raw/e1e387baea2f73175f16f8460ff1f528910bfe16/test.html",
+          "https://glcdn.githack.com/neoascetic/test.html/-/raw/e1e387baea2f73175f16f8460ff1f528910bfe16/test.html",
+          "https://bb.githack.com/neoascetic/test.html/raw/e1e387baea2f73175f16f8460ff1f528910bfe16/test.html",
+          "https://bbcdn.githack.com/neoascetic/test.html/raw/e1e387baea2f73175f16f8460ff1f528910bfe16/test.html"
+          ]}'
+          --next -K curl-config
+          https://raw.githack.com/neoascetic/rawgithack/b6d3163820c248da0144168cd6f0304db9fc6b73/web/index.html#github
+          --next -K curl-config
+          https://rawcdn.githack.com/neoascetic/rawgithack/b6d3163820c248da0144168cd6f0304db9fc6b73/web/index.html#github_cdn
+          --next -K curl-config
+          https://gist.githack.com/neoascetic/7716ac3cb04751d428063e9067763403/raw/e1e387baea2f73175f16f8460ff1f528910bfe16/test.html#github_gist
+          --next -K curl-config
+          https://gistcdn.githack.com/neoascetic/7716ac3cb04751d428063e9067763403/raw/e1e387baea2f73175f16f8460ff1f528910bfe16/test.html#github_gist_cdn
+          --next -K curl-config
+          https://gl.githack.com/neoascetic/test.html/-/raw/e1e387baea2f73175f16f8460ff1f528910bfe16/test.html#gitlab
+          --next -K curl-config
+          https://glcdn.githack.com/neoascetic/test.html/-/raw/e1e387baea2f73175f16f8460ff1f528910bfe16/test.html#gitlab_cdn
+          --next -K curl-config
+          https://bb.githack.com/neoascetic/test.html/raw/e1e387baea2f73175f16f8460ff1f528910bfe16/test.html#bitbucket
+          --next -K curl-config
+          https://bbcdn.githack.com/neoascetic/test.html/raw/e1e387baea2f73175f16f8460ff1f528910bfe16/test.html#bitbucket_cdn
+      - name: Run truncate
+        run: echo "$(tail -25000 log.csv)" > "log.csv"
+        if: always()
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        if: always()
+        with:
+          commit_message: Update report
+          file_pattern: 'log\.csv'
+          commit_author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          commit_options: '--amend --no-edit'
+          push_options: '--force'
+          skip_fetch: true
