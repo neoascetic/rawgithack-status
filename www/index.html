@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<title>Status page | raw.githack.com</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Current status of raw.githack.com service">
+<link rel="stylesheet" href="//rawcdn.githack.com/neoascetic/rawgithack/ee590f6/web/rawgithack.css?min=1">
+
+<link rel="canonical" href="https://status.raw.githack.com/">
+<link rel="search" type="application/opensearchdescription+xml" href="//rawcdn.githack.com/neoascetic/rawgithack/465ac52/web/opensearch.xml" title="raw.githack.com">
+<link rel="icon" href="//rawcdn.githack.com/neoascetic/rawgithack/092e86b/web/sushi.svg">
+
+</head>
+
+<body>
+
+<header class="hd">
+  <h1 class="title">
+    <img class="logo" src="//rawcdn.githack.com/neoascetic/rawgithack/092e86b/web/sushi.svg" alt="Logo icon">
+    <a href="https://raw.githack.com/">raw.githack.com</a>
+  </h1>
+  <nav class="nav">
+    <ul>
+      <li><a href="https://raw.githack.com/faq">FAQ</a></li>
+      <li><a href="https://raw.githack.com/purge-cache">Purge cache</a></li>
+      <li><a href="https://raw.githack.com/hacks">Git Hacks<sup>new</sup></a></li>
+      <li><a href="https://raw.githack.com/faq#sponsorship">❤️</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div><script async src="//cdn.carbonads.com/carbon.js?serve=CEADPK3U&placement=rawgithackcom" id="_carbonads_js"></script></div>
+
+<div class="bd">
+  <div class="content">
+
+    <link rel="stylesheet" href="index.css" />
+
+    <p class="hero">
+      <strong>Service status</strong>
+    </p>
+
+    <div id="reports" class="reportContainer"></div>
+    <div id="tooltip" class="tooltip" style="opacity: 0">
+      <div id="tooltipArrow" class="tooltipArrow"></div>
+      <div id="tooltipDateTime" class="tooltipDateTime"></div>
+      <div id="tooltipStatus" class="tooltipStatus"></div>
+      <hr />
+      <div id="tooltipDescription" class="tooltipDescription"></div>
+    </div>
+    <div id="templates" style="display: none">
+      <div id="statusSquareTemplate" class="statusSquare $color" data-status="$color"></div>
+      <div id="statusLineTemplate" class="statusLine"></div>
+      <div id="statusStreamContainerTemplate" class="statusStreamContainer"></div>
+      <div id="statusContainerTemplate" class="statusContainer">
+        <div class="statusHeader">
+          <h3 class="statusTitle">$title&nbsp;</h6>
+          <div class="$color statusHeadline">$status</div>
+        </div>
+        <div class="statusSubtitle">
+          <div class="statusUptime">$upTime in the last 30 days</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="index.js"></script>
+
+  </div>
+</div>
+
+<footer class="ft">
+  <p>
+    © <strong>2013 — 2025</strong> Pavel Puchkin
+    <br>
+    <a href="http://thenounproject.com/noun/sushi/#icon-No14497">Sushi icon</a> designed by <a href="http://thenounproject.com/lnakanishi">Linda Yuki Nakanishi</a> from The Noun Project.
+    <br>
+    <a href="https://raw.githack.com/faq">FAQ</a>
+    <a href="https://raw.githack.com/hacks">Hacks</a>
+    <a href="https://raw.githack.com/purge-cache">Purge cache</a>
+    <a href="https://raw.githack.com/faq#feedback">Report abuse</a>
+    <a href="https://status.raw.githack.com/">Status page</a>
+    <a href="https://github.com/neoascetic/rawgithack">Source code</a>
+  </p>
+</footer>
+
+
+<script defer src="//rawcdn.githack.com/cdnjs/cdnjs/0971b44/ajax/libs/fetch/2.0.1/fetch.min.js?min=1"></script>
+<script defer src="//rawcdn.githack.com/neoascetic/rawgithack/35d3b36/web/rawgithack.js?min=1"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "9fdcadef580f4335ad3c1e18bf166d0f"}'></script>
+
+</body>
+
+</html>
